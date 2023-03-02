@@ -1,0 +1,157 @@
+@import "reset.less";
+
+body{
+	background-color: #383838;
+	font-size: 0px;
+	& > #wrap{
+		& > #controls_wrap{
+			position: relative;
+			width: 100%;
+			height: 25px;
+			background-color: #2a2a2a;
+			float: left;
+			& > #left{
+				position: absolute;
+				width: 55px;
+				height: 25px;
+				& > div{
+					position: absolute;
+					line-height: 25px;
+					& > span{
+						display: inline-block;
+						width: 12px;
+						height: 15px;
+						background: url(../img/icon.png) no-repeat;
+					}				
+					& > #start{
+						background-position: -2px -31px;
+						&.active{
+							background-position: -2px -16px;
+						}
+					}
+					& > #reload{
+						background-position: -2px -2px;
+					}
+				}
+				& > #start_wrap{
+					top: 5px;
+					left: 12px;
+				}
+				& > #reload_wrap{
+					top: 5px;
+					left: 32px;
+				}
+			}
+			& > #middle{
+				// position: absolute;
+				// width: 100%;
+				height: 25px;
+				margin: 0 230px 0 55px;
+				& > #progress{
+					position: relative;
+					height: 3px;
+					background-color: #737373;
+					margin-top: 11px;
+					& > #progress_btn{
+						position: absolute;
+						width: 9px;
+						height: 7px;
+						background-color: white;
+						border-radius: 2px;
+						margin-top: -2px;
+					}
+					& > #progress_inner{
+						// position: absolute;
+						width: 0px;
+						background-color: aqua;
+						height: 100%;
+					}
+				}
+			}
+			& > #right {
+				position: absolute;
+				width: 230px;
+				height: 25px;
+				right: 0;
+				bottom: 0;
+				& > div:not(:first-child){
+					position: absolute;
+					line-height: 25px;
+					& span{
+						display: inline-block;
+						background: url(../img/icon.png) no-repeat;
+					}
+				}
+				& > #time_wrap{
+					width: 120px;
+					font-size: 12px;
+					color: white;
+					position: absolute;
+					line-height: 25px;
+					right: 100px;
+				}
+				
+				& > #sound{		
+					position: absolute;
+					width: 80px;
+					right: 30px;
+					& > #sound_btn_wrap{
+						float: left;
+						& > #sound_btn{
+							margin: 7px auto;
+							width: 15px;
+							height: 12px;
+							background-position: -2px -48px;
+							&.active{
+								background-position: -2px -63px;
+							}
+						}
+					}
+					
+					& > #sound_progress{
+						position: relative;
+						width: 60px;
+						height: 3px;
+						background-color: #737373;
+						margin-top: 11px;
+						margin-left: 20px;
+						& > #sound_progress_btn{
+							position: absolute;
+							width: 9px;
+							height: 7px;
+							background-color: white;
+							border-radius: 2px;
+							margin-top: -2px;
+							
+						}
+						& > #sound_progress_inner{
+							// position: absolute;
+							width: 0px;
+							background-color: aqua;
+							height: 100%;
+						}
+					}
+					
+				}
+				& > #full_screen_btn_wrap{
+					right: 0;
+					position: absolute;
+					width: 30px;
+					text-align: center;
+					line-height: 35px;
+					& span{
+						display: inline-block;
+						width: 15px;
+						height: 15px;
+						background: url(../img/icon.png) no-repeat;
+						background-position: -2px -74px;
+						&.active{
+							background-position: -2px -90px;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}

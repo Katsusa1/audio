@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+	<script src="js/drag.js"></script>
+	<body>
+		<div id="wrap">
+			<video src="video/坂本真綾 - 逆光 (Short Ver.).mp4"></video>
+			<div id="controls_wrap">
+				<div id="left">
+					<div id="start_wrap">
+						<span id="start"></span>
+					</div>
+					<div id="reload_wrap">
+						<span id="reload"></span>
+					</div>
+				</div>
+				<div id="middle">
+					<div id="progress">
+						<div id="progress_btn"></div>
+						<div id="progress_inner"></div>
+					</div>
+				</div>
+				<div id="right">
+					<div id="time_wrap">
+						<span id="nowtime">00:00:00</span> / <span id="alltime">00:00:00</span>
+					</div>
+					<div id="sound">
+						<div id="sound_btn_wrap">
+							<span id="sound_btn"></span>
+						</div>
+						<div id="sound_progress">
+							<div id="sound_progress_btn"></div>
+							<div id="sound_progress_inner"></div>
+						</div>
+					</div>
+					<div id="full_screen_btn_wrap">
+						<span id="full_screen_btn"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var video = document.querySelector("video");
+			var controls = document.querySelector("#controls_wrap");
+			var progress = document.querySelector("#progress");
+			var progress_btn = document.querySelector("#progress_btn");
+			var progress_inner = document.querySelector("#progress_inner");
+			var sound_progress = document.querySelector("#sound_progress");
+			var sound_progress_btn = document.querySelector("#sound_progress_btn");
+			var sound_progress_inner = document.querySelector("#sound_progress_inner");
+			var start = document.querySelector("#start");
+			var reload = document.querySelector("#reload");
+			var nowtime = document.querySelector("#nowtime");
+			var alltime = document.querySelector("#alltime");
+			var sound_btn_wrap = document.querySelector("#sound_btn_wrap");
+			var sound_btn = document.querySelector("#sound_btn");
+			var full_screen_btn_wrap = document.querySelector("#full_screen_btn_wrap");
+			var full_screen_btn = document.querySelector("#full_screen_btn");
+			var ratio = 1;
+			
+			player();
+			var timer = 0;
+			function player(){
+				// 开始
+				// 设置音量
+				sound_progress_inner.style.width = sound_progress.clientWidth - sound_progress_btn.offsetWidth + "px";;
+				sound_progress_btn.style.right = 0;
+				
+				var flag = flag2 = 1;
+				var isFullScreen = false;
+				start.onclick = function(){
+					if(flag){
+						flag = !flag;
+						video.play();
+						addClass(this,"active");
+						timer = setInterval(move,10);
+					}else{
+						flag = !flag;
+						video.pause();
+						removeClass(this,"active");
+						clearInterval(timer);
+					}
+				}
+				
+				// 重新加载
+				reload.onclick = function(){
+					video.pause();
+					video.currentTime = 0;
+					removeClass(start,"active");
+					flag = 1;
+				}
+				
+				// 点击进度条跳转播放
+				progress.onclick = function(ev){
+					ev = ev || event;
+					video.play();
+					flag = 0;
+					addClass(start,"active");
+					timer = setInterval(move,10);
+					video.currentTime = video.duration*(ev.clientX-progress.offsetLeft)/(progress.clientWidth - progress_btn.offsetWidth);
+				}
+				
+				// 视频时间
+				// 视频总时间
+				video.addEventListener("loadeddata",function(){
+					alltime.innerHTML = changetime(video.duration);
+				})
+				
+				
+				// 音量键
+				sound_btn_wrap.onclick = function(){
+					if(flag2){
+						addClass(sound_btn,"active");
+						flag2 = !flag2;
+						video.muted = true;
+						video.volume = 0;
+						sound_progress_inner.style.width = sound_progress_btn.style.left = 0 + "px";
+					}else{
+						removeClass(sound_btn,"active");
+						flag2 = !flag2;
+						if(ratio == 1){
+							ratio = 0.85;
+						}
+						video.volume = ratio;
+						video.muted = false;
+						ratio = ratio==0?0.85:ratio;
+						sound_progress_inner.style.width = sound_progress_btn.style.left = (sound_progress.clientWidth - sound_progress_inner.offsetWidth)*ratio + "px";
+					}
+					// if(video.volume == 0){
+					// 	addClass(sound_btn,"active");
+					// }
+				}
+				
+				// 点击切换音量大小
+				/* sound_progress.onclick = function(){
+					sound_progress_btn.style.left = sound_progress_inner.style.width = sound_progress.clientWidth - sound_progress_btn.offsetWidth + "px";
+					// sound_btn.style.left = 20 + "px";
+					console.log(sound_progress.clientWidth);
+					console.log(sound_progress_btn.offsetWidth);
+				} */
+				
+				// 全屏
+				full_screen_btn_wrap.onclick = function(){
+					if(isFullScreen){
+						isFullScreen = false;
+						addClass(full_screen_btn,"active");
+						if(document.exitFullscreen){
+							document.exitFullscreen();
+						}else if(document.mozCancelFullScreen){
+							document.mozCancelFullScreen();
+						}else if(document.webkitCancelFullScreen){
+							document.webkitCancelFullScreen();
+						}else if(document.msExitFullscreen){
+							document.msExitFullscreen();
+						}
+					}else{
+						removeClass(full_screen_btn,"active");
+						isFullScreen = true;
+						var docElm = document.documentElement;
+						// W3C
+						if(docElm.requestFullscreen){
+							docElm.requestFullscreen();
+						}
+						// FireFox
+						 else if(docElm.mozRequestFullScreen){
+							 docElm.mozRequestFullScreen();
+						 }
+						 // Chrome等
+						 else if(docElm.webkitMatchesSelector){
+							 docElm.webkitMatchesSelector();
+						 }
+						 // IE11
+						 else if(docElm.msRequestFullScreen){
+							 docElm.msRequestFullScreen();
+						 }					
+					}
+				}
+				
+		
+				function move(){
+				    progress_btn.style.left = progress_inner.style.width = (video.currentTime/video.duration)*(progress.clientWidth - progress_btn.offsetWidth) + "px";
+					// 当前播放时间
+					nowtime.innerHTML = changetime(video.currentTime);
+				}
+				
+				
+			}
+			
+			// 视频大小随浏览器屏幕大小变化
+			window.onresize = function(){
+				video.width = document.documentElement.clientWidth;
+				video.height = document.documentElement.clientHeight - controls.offsetHeight;
+			}
+			
+			// 进度条的拖动
+			var callback = {
+				// 回调
+				move:function(){
+					video.play();
+					progress_inner.style.width = this.offsetLeft + "px";
+					var scale = this.offsetLeft/(progress.clientWidth-progress_btn.offsetWidth);
+					video.currentTime = video.duration*scale;
+				}
+			}
+			// 音量的拖动
+			var callback2 = {
+				// 回调
+				move:function(){
+					sound_progress_inner.style.width = this.offsetLeft + "px";
+					video.muted = false;
+					// var scale = this.offsetLeft/(sound_progress.clientWidth - sound_progress_btn.offsetWidth);
+					var scale = parseInt(sound_progress_inner.style.width)/(sound_progress.clientWidth - sound_progress_btn.style.width);
+					video.volume = scale
+					ratio = scale;
+					if(parseInt(sound_progress_inner.style.width) == 0){
+						addClass(sound_btn,"active");
+						video.muted = true;				
+					}else{
+						removeClass(sound_btn,"active");					
+					}
+				}
+			}
+			$.drag(progress_btn,callback);
+			$.drag(sound_progress_btn,callback2);
+			// progress_inner.style.width 
+		
+			
+			
+			// 工具类
+			
+			// 时间转换
+			function changetime(time){
+				var h = m = s = 0;
+				time = parseInt(time);
+				h = toZero(Math.floor(time/3600));
+				m = toZero(Math.floor(time%3600/60));
+				s = toZero(time%3600%60);
+				return h+":"+m+":"+s;
+			}
+			
+			// 字符串前面加0
+			function toZero(num){
+				var val = "";
+				if(num < 10){
+					num = "0" + num;
+				}else{
+					num = val + num;
+				}
+				return num;
+			}
+			
+			// 全屏实现
+			/* full.onclick = function(){
+				if(isFullScreen){
+					isFullScreen = false;
+					if(document.exitFullscreen){
+						document.exitFullscreen();
+					}else if(document.mozCancelFullScreen){
+						document.mozCancelFullScreen();
+					}else if(document.webkitCancelFullScreen){
+						document.webkitCancelFullScreen();
+					}else if(document.msExitFullscreen){
+						document.msExitFullscreen();
+					}
+				}else{
+					isFullScreen = true;
+					var docElm = document.documentElement;
+					// W3C
+					if(docElm.requestFullscreen){
+						docElm.requestFullscreen();
+					}
+					// FireFox
+					 else if(docElm.mozRequestFullScreen){
+						 docElm.mozRequestFullScreen();
+					 }
+					 // Chrome等
+					 else if(docElm.webkitMatchesSelector){
+						 docElm.webkitMatchesSelector();
+					 }
+					 // IE11
+					 else if(docElm.msRequestFullScreen){
+						 docElm.msRequestFullScreen();
+					 }					
+				}
+			} */
+			
+			// 添加类
+			function addClass(node,className){
+				var reg = new RegExp("\\b"+className+"\\b");
+				if(!reg.test(node.className)){
+					node.className +=(" "+className);
+				}
+			}
+			
+			// 删除类
+			function removeClass(node,className){
+				if(node.className){
+					var reg = new RegExp("\\b"+className+"\\b");
+					var classes = node.className;
+					node.className = classes.replace(reg,"");
+					if(/^\s*$/g.test(node.className)){
+						node.removeAttribute("class");
+					}else{
+						node.removeAttribute("class");
+					}
+				}
+				
+			}
+	
+		}
+	</script>
+</html>

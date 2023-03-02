@@ -1,0 +1,329 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* custom */
+a {
+  color: #7e8c8d;
+  text-decoration: none;
+  -webkit-backface-visibility: hidden;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  height: 5px;
+  background-color: rgba(125, 125, 125, 0.7);
+  -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: rgba(125, 125, 125, 0.7);
+  -webkit-border-radius: 6px;
+}
+html,
+body {
+  width: 100%;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", "微软雅黑", sans-serif;
+}
+body {
+  line-height: 1;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html {
+  overflow-y: scroll;
+}
+/*清除浮动*/
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: inline-block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+/*隐藏*/
+.dn {
+  display: none;
+}
+body {
+  background-color: #383838;
+  font-size: 0px;
+}
+body > #wrap > #controls_wrap {
+  position: relative;
+  width: 100%;
+  height: 25px;
+  background-color: #2a2a2a;
+  float: left;
+}
+body > #wrap > #controls_wrap > #left {
+  position: absolute;
+  width: 55px;
+  height: 25px;
+}
+body > #wrap > #controls_wrap > #left > div {
+  position: absolute;
+  line-height: 25px;
+}
+body > #wrap > #controls_wrap > #left > div > span {
+  display: inline-block;
+  width: 12px;
+  height: 15px;
+  background: url(../img/icon.png) no-repeat;
+}
+body > #wrap > #controls_wrap > #left > div > #start {
+  background-position: -2px -31px;
+}
+body > #wrap > #controls_wrap > #left > div > #start.active {
+  background-position: -2px -16px;
+}
+body > #wrap > #controls_wrap > #left > div > #reload {
+  background-position: -2px -2px;
+}
+body > #wrap > #controls_wrap > #left > #start_wrap {
+  top: 5px;
+  left: 12px;
+}
+body > #wrap > #controls_wrap > #left > #reload_wrap {
+  top: 5px;
+  left: 32px;
+}
+body > #wrap > #controls_wrap > #middle {
+  height: 25px;
+  margin: 0 230px 0 55px;
+}
+body > #wrap > #controls_wrap > #middle > #progress {
+  position: relative;
+  height: 3px;
+  background-color: #737373;
+  margin-top: 11px;
+}
+body > #wrap > #controls_wrap > #middle > #progress > #progress_btn {
+  position: absolute;
+  width: 9px;
+  height: 7px;
+  background-color: white;
+  border-radius: 2px;
+  margin-top: -2px;
+}
+body > #wrap > #controls_wrap > #middle > #progress > #progress_inner {
+  width: 0px;
+  background-color: aqua;
+  height: 100%;
+}
+body > #wrap > #controls_wrap > #right {
+  position: absolute;
+  width: 230px;
+  height: 25px;
+  right: 0;
+  bottom: 0;
+}
+body > #wrap > #controls_wrap > #right > div:not(:first-child) {
+  position: absolute;
+  line-height: 25px;
+}
+body > #wrap > #controls_wrap > #right > div:not(:first-child) span {
+  display: inline-block;
+  background: url(../img/icon.png) no-repeat;
+}
+body > #wrap > #controls_wrap > #right > #time_wrap {
+  width: 120px;
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  line-height: 25px;
+  right: 100px;
+}
+body > #wrap > #controls_wrap > #right > #sound {
+  position: absolute;
+  width: 80px;
+  right: 30px;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_btn_wrap {
+  float: left;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_btn_wrap > #sound_btn {
+  margin: 7px auto;
+  width: 15px;
+  height: 12px;
+  background-position: -2px -48px;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_btn_wrap > #sound_btn.active {
+  background-position: -2px -63px;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_progress {
+  position: relative;
+  width: 60px;
+  height: 3px;
+  background-color: #737373;
+  margin-top: 11px;
+  margin-left: 20px;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_progress > #sound_progress_btn {
+  position: absolute;
+  width: 9px;
+  height: 7px;
+  background-color: white;
+  border-radius: 2px;
+  margin-top: -2px;
+}
+body > #wrap > #controls_wrap > #right > #sound > #sound_progress > #sound_progress_inner {
+  width: 0px;
+  background-color: aqua;
+  height: 100%;
+}
+body > #wrap > #controls_wrap > #right > #full_screen_btn_wrap {
+  right: 0;
+  position: absolute;
+  width: 30px;
+  text-align: center;
+  line-height: 35px;
+}
+body > #wrap > #controls_wrap > #right > #full_screen_btn_wrap span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: url(../img/icon.png) no-repeat;
+  background-position: -2px -74px;
+}
+body > #wrap > #controls_wrap > #right > #full_screen_btn_wrap span.active {
+  background-position: -2px -90px;
+}
